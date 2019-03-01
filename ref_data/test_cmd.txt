@@ -1,0 +1,12 @@
+module load python/2.7.11
+module load R/3.2.1
+
+"""
+To test the CEFCIG, run the following command under src directory.
+"""
+
+#python CEFCIG.py GridGo ../ref_data/gene_metadata.txt ../ref_data/genes.fpkm.qn.txt ../ref_data/hg19.GREATgene2UCSCknownGenes.table.xls ../ref_data/wigs_metadata.txt ../test_results
+
+python CEFCIG.py PredictGo ../ref_data/gene_metadata.txt ../data/GridGo_step2.pkl ../ref_data/hg19.GREATgene2UCSCknownGenes.table.xls ../ref_data/test_wigs_metadata.txt ../ref_data/test_fpkm.xls ../test_results
+
+python CEFCIG.py CigNet ../ref_data/test_all_results.csv ../ref_data/test_fpkm.xls ../test_results

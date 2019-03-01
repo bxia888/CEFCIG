@@ -1,0 +1,5 @@
+cell_type	marker	path
+test	H3K4me3	../data/test_h3k4me3.qnor.wig
+test	H3K4me1	../data/test_h3k4me1.qnor.wig
+test	H3K27me3	../data/test_h3k27me3.qnor.wig
+test	H3K27ac	../data/test_h3k27ac.qnor.wig
