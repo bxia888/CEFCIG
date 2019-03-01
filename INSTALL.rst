@@ -42,17 +42,17 @@ Download test files
 ===================
 CEFCIG test required wig file from ChipSeq data and python pkl object from each step. Please download the test files and put into data directory:
 
-`H3K4me3-Chipseq <http://cigwiki.houstonmethodist.org/trackhub/boxia/test_h3k4me3.qnor.wig>`_
+`H3K4me3-Chipseq <http://cigwiki.houstonmethodist.org/trackhub/boxia/CEFCIG/test_h3k4me3.qnor.wig>`_
 
-`H3K4me1-Chipseq <http://cigwiki.houstonmethodist.org/trackhub/boxia/test_h3k4me1.qnor.wig>`_
+`H3K4me1-Chipseq <http://cigwiki.houstonmethodist.org/trackhub/boxia/CEFCIG/test_h3k4me1.qnor.wig>`_
 
-`H3K27ac-Chipseq <http://cigwiki.houstonmethodist.org/trackhub/boxia/test_h3k27ac.qnor.wig>`_
+`H3K27ac-Chipseq <http://cigwiki.houstonmethodist.org/trackhub/boxia/CEFCIG/test_h3k27ac.qnor.wig>`_
 
-`H3K27me3-Chipseq <http://cigwiki.houstonmethodist.org/trackhub/boxia/test_h3k27me3.qnor.wig>`_
+`H3K27me3-Chipseq <http://cigwiki.houstonmethodist.org/trackhub/boxia/CEFCIG/test_h3k27me3.qnor.wig>`_
 
-`PredictTest <http://cigwiki.houstonmethodist.org/trackhub/boxia/GridGo_step2.pkl>`_
+`PredictTest <http://cigwiki.houstonmethodist.org/trackhub/boxia/CEFCIG/GridGo_step2.pkl>`_
 
-`CigNetTest <http://cigwiki.houstonmethodist.org/trackhub/boxia/cignet_obj.pkl>`_
+`CigNetTest <http://cigwiki.houstonmethodist.org/trackhub/boxia/CEFCIG/cignet_obj.pkl>`_
 
 Contributors
 ===================
