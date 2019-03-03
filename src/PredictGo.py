@@ -18,6 +18,7 @@ stats = importr('stats')
 
 def preknown_cost(meta_df, train_df, real_table, columns, preknown_list, verbose=False):
     cur_train_df = train_df[columns].copy()
+
     cur_train_df = label_label(cur_train_df, meta_df)
     scaler = center_normalization(cur_train_df.iloc[:, :-1])
     cur_train_df.iloc[:, :-1] = preprocessing_table(scaler, cur_train_df.iloc[:, :-1])
@@ -129,7 +130,7 @@ class PredictGo:
     """
     Optimize the genomic features of a set of genes, store current best parameters
     """
-    def __init__(self, genes, gtf, training_table, parameters, preknown, gene_meta_df):
+    def __init__(self, genes, gtf, training_table, parameters, preknown, gene_meta_df, test_predict=None):
         """
 
         :param genes: gene objects, all genes in gtf
@@ -138,45 +139,55 @@ class PredictGo:
         :param parameters: parameters from GridGo
         :param preknown: preknown knowledge, empty list if nothing known or None
         :param gene_meta_df: curated genes meta information
+        :param test_predict: test real table for test only
         """
-        self.genes = genes
-        self.gtf = gtf
-        self.training_table = training_table
-        self.parameters = parameters
-        self.preknown = preknown
-        self.gene_meta_df = gene_meta_df
-        self.prediction = None
-        self.gene_ids = [x.gene_id for x in self.genes]
+        if test_predict is None:
+            self.genes = genes
+            self.gtf = gtf
+            self.training_table = training_table
+            self.parameters = parameters
+            self.preknown = preknown
+            self.gene_meta_df = gene_meta_df
+            self.prediction = None
+            self.gene_ids = [x.gene_id for x in self.genes]
 
+            index = []
+            labels = []
+            gene_ids = []
+            expressions = []
+            markers = set()
+            features = ['total_width', 'total_signal', 'height', 'coverage', 'skewness', 'kurtosis']
+            genebody_types = ['TSS', 'genebody']
 
-        index = []
-        labels = []
-        gene_ids = []
-        expressions = []
-        markers = set()
-        features = ['total_width', 'total_signal', 'height', 'coverage', 'skewness', 'kurtosis']
-        genebody_types = ['TSS', 'genebody']
+            for gene in self.genes:
+                gene_ids.append(gene.gene_id)
+                labels.append(gene.label)
+                index.append(gene.gene_id + '_' + gene.celltype)
+                expressions.append(gene.exp)
+                for type_signal in gene.signal.keys():
+                    markers.add(type_signal)
+            markers = list(markers)
+            columns = ['_'.join([marker, feature, genebody_type]) for marker in markers
+                       for feature in features
+                       for genebody_type in genebody_types]
 
-        for gene in self.genes:
-            gene_ids.append(gene.gene_id)
-            labels.append(gene.label)
-            index.append(gene.gene_id + '_' + gene.celltype)
-            expressions.append(gene.exp)
-            for type_signal in gene.signal.keys():
-                markers.add(type_signal)
-        markers = list(markers)
-        columns = ['_'.join([marker, feature, genebody_type]) for marker in markers
-                   for feature in features
-                   for genebody_type in genebody_types]
+            self.real_table = pd.DataFrame(index=index, columns=columns)
+            self.real_table.index.name = 'gene_id'
+            # self.real_table['label'] = labels
+            self.real_table['gene_id'] = gene_ids
+            self.real_table['RNA_exp'] = expressions
 
-        self.real_table = pd.DataFrame(index=index, columns=columns)
-        self.real_table.index.name = 'gene_id'
-        self.real_table['label'] = labels
-        self.real_table['gene_id'] = gene_ids
-        self.real_table['RNA_exp'] = expressions
-
-        self.update_real_table()
-        self.real_table = self.real_table.fillna(0)
+            self.update_real_table()
+            self.real_table = self.real_table.fillna(0)
+        else:
+            self.genes = genes
+            self.gtf = gtf
+            self.training_table = training_table
+            self.parameters = parameters
+            self.preknown = preknown
+            self.gene_meta_df = gene_meta_df
+            self.prediction = None
+            self.real_table = test_predict
 
     def get_prediction_result(self):
         return self.prediction

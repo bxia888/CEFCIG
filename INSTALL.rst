@@ -40,7 +40,7 @@ Add CEFCIG_PATH to your PATH environment variable.
 
 Download test files
 ===================
-CEFCIG test required wig file from ChipSeq data and python pkl object from each step. Please download the test files and put into data directory:
+CEFCIG test required wig file from ChipSeq data and python pkl object from each step. Please download the test files and put into data directory and run the test command in /ref_data/test_cmd.txt, expected results stored in the test_results directory:
 
 `H3K4me3-Chipseq <http://cigwiki.houstonmethodist.org/trackhub/boxia/CEFCIG/test_h3k4me3.qnor.wig>`_
 
@@ -49,10 +49,6 @@ CEFCIG test required wig file from ChipSeq data and python pkl object from each 
 `H3K27ac-Chipseq <http://cigwiki.houstonmethodist.org/trackhub/boxia/CEFCIG/test_h3k27ac.qnor.wig>`_
 
 `H3K27me3-Chipseq <http://cigwiki.houstonmethodist.org/trackhub/boxia/CEFCIG/test_h3k27me3.qnor.wig>`_
-
-`PredictTest <http://cigwiki.houstonmethodist.org/trackhub/boxia/CEFCIG/GridGo_step2.pkl>`_
-
-`CigNetTest <http://cigwiki.houstonmethodist.org/trackhub/boxia/CEFCIG/cignet_obj.pkl>`_
 
 Contributors
 ===================
